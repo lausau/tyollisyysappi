@@ -1,40 +1,23 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 Sys.setlocale(locale="UTF-8") 
 
-# Navigate through all pxweb api:s in the R package API catalogue
-#d <- pxweb_interactive()
-
 # PXWEB query 
-#pxweb_query_list <- 
-#    list("Alue"=c("SSS","MK01","MK02","MK04","MK05","MK06","MK07","MK08","MK09","MK10","MK11","MK12","MK13","MK14","MK15","MK16","MK17","MK18","MK19","MK21"),
-#         "Pääasiallinen toiminta"=c("11"),
-#         "Koulutusaste"=c("SSS","3_4","5_6","7_8","9_X"),
-#         "Tiedot"=c("vaesto"),
-#         "Sukupuoli"=c("1","2"),
-#         "Ikä"=c("SSS"),
-#         "Vuosi"=c("1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"))
+pxweb_query_list <- 
+    list("Alue"=c("SSS","MK01","MK02","MK04","MK05","MK06","MK07","MK08","MK09","MK10","MK11","MK12","MK13","MK14","MK15","MK16","MK17","MK18","MK19","MK21"),
+         "Pääasiallinen toiminta"=c("11"),
+         "Koulutusaste"=c("SSS","3_4","5_6","7_8","9_X"),
+         "Tiedot"=c("vaesto"),
+         "Sukupuoli"=c("1","2"),
+         "Ikä"=c("SSS"),
+         "Vuosi"=c("1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"))
 
 # Download data 
-#px_data <- 
-#    pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115d.px",
-#              query = pxweb_query_list)
+px_data <- 
+    pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/vrm/tyokay/statfin_tyokay_pxt_115d.px",
+              query = pxweb_query_list)
 
 # Convert to data.frame 
 px_data <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
-
-# Get pxweb data comments 
-#px_data_comments <- pxweb_data_comments(px_data)
-#px_data_comments_df <- as.data.frame(px_data_comments)
-
 
 ## Shinyapp jossa käyttäjä voi valita maakunnan ja sukupuolen, ja nähdä työllisten määrän per koulutus
 # Mitä arvoja Alue-muuttuja saa
@@ -115,9 +98,6 @@ server <- function(input, output) {
                 http://github.com/ropengov/pxweb")
     })
 }
-
-# Cite the data as 
-#pxweb_cite(px_data)
 
 # Run the application 
 shinyApp(ui = ui, server = server)
